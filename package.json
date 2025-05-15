@@ -7,7 +7,7 @@
   },
   "node-red": {
     "nodes": {
-      "airtable-http": "nodes/airtable-http.js"
+      "airtable-http": "airtable-http.js"
     }
   },
   "keywords": ["node-red","airtable","http"],
