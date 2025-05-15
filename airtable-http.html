@@ -1,0 +1,63 @@
+<script type="text/html" data-template-name="airtable-http">
+  <div class="form-row">
+    <label for="node-input-baseId"><i class="fa fa-database"></i> Base ID</label>
+    <input type="text" id="node-input-baseId" placeholder="appXXXXXXXXXXXXXX">
+  </div>
+  <div class="form-row">
+    <label for="node-input-tableName"><i class="fa fa-table"></i> Table Name</label>
+    <input type="text" id="node-input-tableName" placeholder="Table name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-operation"><i class="fa fa-exchange-alt"></i> Operation</label>
+    <select id="node-input-operation">
+      <option value="list">List</option>
+      <option value="get">Get</option>
+      <option value="create">Create</option>
+      <option value="update">Update</option>
+      <option value="delete">Delete</option>
+      <option value="variable">Variable (msg.operation)</option>
+    </select>
+  </div>
+  <div class="form-row" id="node-row-recordId">
+    <label for="node-input-recordId"><i class="fa fa-id-badge"></i> Record ID</label>
+    <input type="text" id="node-input-recordId" placeholder="recXXXXXXXXXXXXXX">
+  </div>
+  <div class="form-row" id="node-row-view">
+    <label for="node-input-view"><i class="fa fa-eye"></i> View</label>
+    <input type="text" id="node-input-view">
+  </div>
+  <div class="form-row" id="node-row-fields">
+    <label for="node-input-fields"><i class="fa fa-list"></i> Fields (comma separated)</label>
+    <input type="text" id="node-input-fields" placeholder="Field1,Field2,...">
+  </div>
+  <div class="form-row" id="node-row-filter">
+    <label for="node-input-filterByFormula"><i class="fa fa-filter"></i> Filter By Formula</label>
+    <input type="text" id="node-input-filterByFormula">
+  </div>
+  <div class="form-row" id="node-row-sort">
+    <label for="node-input-sortField"><i class="fa fa-sort-alpha-down"></i> Sort Field</label>
+    <input type="text" id="node-input-sortField">
+    <label for="node-input-sortDirection">Direction</label>
+    <select id="node-input-sortDirection">
+      <option value="asc">Asc</option>
+      <option value="desc">Desc</option>
+    </select>
+  </div>
+</script>
+<script type="text/javascript">
+  RED.nodes.registerEditor('airtable-http', {
+    oneditprepare: function() {
+      function showRows(op) {
+        $("#node-row-recordId").toggle(op==='get'||op==='update'||op==='delete');
+        $("#node-row-view").toggle(op==='list');
+        $("#node-row-fields").toggle(op==='list');
+        $("#node-row-filter").toggle(op==='list');
+        $("#node-row-sort").toggle(op==='list');
+      }
+      $("#node-input-operation").change(function() {
+        showRows(this.value);
+      });
+      showRows($("#node-input-operation").val());
+    }
+  });
+</script>
