@@ -1,5 +1,7 @@
 node-red-contrib-airtable-http
 
+This is my first repo and i also vibe coded almost all of it, so use at your own risk! 😅
+
 A Node-RED node to interact with Airtable via direct HTTP requests (no airtable.js dependency).
 
 Features
